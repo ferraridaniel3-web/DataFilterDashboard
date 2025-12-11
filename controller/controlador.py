@@ -15,12 +15,24 @@ class Controller:
 
     def cargar_archivo(self,ruta):
         print("10")
-        self.model.cargar_archivos(ruta)
-        self.mostrar_data_frame()
+        self.df, self.heads_df=self.model.cargar_archivos(ruta)
+        data_frame= self.model.mostrar_data_frame()
+        self.view.mostrar_data_frame(data_frame)
+        return self.df, self.heads_df
+    def pantalla_filtrado(self):
+        tipos_de_datos=self.model.clasificacion_por_datos()
+        self.view.pantalla_filtrado(tipos_de_datos)
+        print(tipos_de_datos)
     def obtener_columnas(self):
         columnas=self.model.obtener_columnas() 
         return columnas
     def mostrar_data_frame(self):
         print("model")
-        matriz_filas= self.model.mostrar_data_frame()
-        self.view.mostrar_data_frame(matriz_filas)
+        data_frame= self.model.mostrar_data_frame()
+        self.view.mostrar_data_frame(data_frame)
+    def funciones_genericas_fecha(self,mi,ma):
+        min,max=self.model.funciones_genericas_fecha(self,mi,ma)
+        return min,max
+    def clasificacion_datos(self):
+        tipo_de_datos=self.model.clasificacion_por_datos()
+        return tipo_de_datos
